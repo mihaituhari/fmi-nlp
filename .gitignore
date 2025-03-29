@@ -14,7 +14,7 @@ venv/
 # 📊 Output
 results/
 logs/
-*.png
+output.png
 *.csv
 
 # 💻 IDE
@@ -26,4 +26,3 @@ logs/
 
 # MacOS system files
 .DS_Store
-

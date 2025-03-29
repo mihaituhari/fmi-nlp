@@ -111,7 +111,7 @@ plt.title("Confusion Matrix")
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.tight_layout()
-plt.savefig("confusion_matrix.png", dpi=300)
+plt.savefig("output.png", dpi=300)
 
 
 # plt.show()
