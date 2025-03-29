@@ -1,0 +1,29 @@
+# 🐍 Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+
+# 📦 Environment
+.venv/
+env/
+venv/
+
+# 📊 Output
+results/
+logs/
+*.png
+*.csv
+
+# 💻 IDE
+.idea/
+.vscode/
+
+# 🧪 Test
+*.log
+
+# MacOS system files
+.DS_Store
+
