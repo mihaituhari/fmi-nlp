@@ -15,30 +15,7 @@ from transformers import BertTokenizer, BertForSequenceClassification, Trainer, 
 from datasets import Dataset
 
 # --- STEP 1: Load or create dataset ---
-data = {
-    "text": [
-        "Life is beautiful and full of hope!",
-        "Everything is pointless and I feel lost.",
-        "I am excited for the future! It is great to be alive.",
-        "Today is a terrible day.",
-        "Not sure how to feel about this week.",
-        "The world is amazing and I love being alive.",
-        "Nothing makes sense anymore.",
-        "I feel optimistic about the changes ahead.",
-        "It’s all going to fall apart soon.",
-        "I’m doing okay, could be worse.",
-        "I love sunny days and good vibes.",
-        "I'm feeling down and nothing helps.",
-        "Maybe things will get better soon.",
-        "This is the worst week of my life.",
-        "Today is just another day.",
-        "This is good",
-        "Great news buddy!"
-    ],
-    # 1=optimist, 0=pesimist, 2=neutral
-    "label": [1, 0, 1, 0, 2, 1, 0, 1, 0, 2, 1, 0, 1, 0, 2, 1, 1]
-}
-
+from training_data import data
 df = pd.DataFrame(data)
 
 # --- STEP 2: Preprocessing ---

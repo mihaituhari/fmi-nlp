@@ -1,4 +1,6 @@
+# @deprecated
 # Sentiment Analysis: Optimism vs Pessimism Classifier
+# Has report plot
 import warnings
 
 warnings.filterwarnings("ignore")

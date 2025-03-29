@@ -1,0 +1,62 @@
+# training_data.py
+
+# 1=optimist, 0=pesimist, 2=neutral
+examples = [
+    ("Life is beautiful and full of hope!", 1),
+    ("Everything is pointless and I feel lost.", 0),
+    ("I am excited for the future! It is great to be alive.", 1),
+    ("Today is a terrible day.", 0),
+    ("Not sure how to feel about this week.", 2),
+    ("The world is amazing and I love being alive.", 1),
+    ("Nothing makes sense anymore.", 0),
+    ("I feel optimistic about the changes ahead.", 1),
+    ("It’s all going to fall apart soon.", 0),
+    ("I’m doing okay, could be worse.", 2),
+    ("I love sunny days and good vibes.", 1),
+    ("I'm feeling down and nothing helps.", 0),
+    ("Maybe things will get better soon.", 1),
+    ("This is the worst week of my life.", 0),
+    ("Today is just another day.", 2),
+    ("This is good", 1),
+    ("Great news buddy!", 1),
+    ("I can’t wait to see what tomorrow brings!", 1),
+    ("There’s nothing left to look forward to.", 0),
+    ("Things might go well, or maybe not.", 2),
+    ("I believe the best is yet to come.", 1),
+    ("Everything feels heavy and meaningless.", 0),
+    ("Could be a good day, could be bad, who knows?", 2),
+    ("I’m full of energy and ready to take on the world!", 1),
+    ("All my plans keep falling apart lately.", 0),
+    ("It’s just an average kind of day.", 2),
+    ("Hope is stronger than fear.", 1),
+    ("Every step I take feels like a mistake.", 0),
+    ("I'm unsure about how this will play out.", 2),
+    ("The future looks bright from where I stand.", 1),
+    ("I feel broken and exhausted.", 0),
+    ("Can’t say I’m happy, but I’m not sad either.", 2),
+    ("What a beautiful surprise this morning was!", 1),
+    ("Darkness seems to follow me everywhere.", 0),
+    ("Nothing special today, just going through the motions.", 2),
+    ("I’m feeling refreshed and hopeful again.", 1),
+    ("The silence is deafening, and the days feel cold.", 0),
+    ("I guess this is fine.", 2),
+    ("What an incredible journey life is!", 1),
+    ("It all feels hopeless sometimes.", 0),
+    ("I’m feeling neutral, no highs or lows today.", 2),
+    ("Feeling thankful for everything I have.", 1),
+    ("Why does nothing ever work out?", 0),
+    ("I suppose today is alright.", 2),
+    ("Success is just around the corner!", 1),
+    ("Everything I do ends in failure.", 0),
+    ("I don’t have strong feelings about this.", 2),
+    ("Feeling blessed and motivated!", 1),
+    ("I feel numb, like I don’t exist.", 0),
+    ("Just going with the flow.", 2),
+    ("Something amazing is coming soon!", 1)
+]
+
+# Convert to the original dict format expected by the main script
+data = {
+    "text": [x[0] for x in examples],
+    "label": [x[1] for x in examples]
+}
