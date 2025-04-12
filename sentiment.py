@@ -1,44 +1,31 @@
 # Sentiment Analysis: Optimism vs Pessimism Classifier
-import warnings
-
-warnings.filterwarnings("ignore")
-
-import logging
-
-logging.getLogger("transformers.modeling_utils").setLevel(logging.ERROR)
-
-import pandas as pd
 import numpy as np
 import torch
-
+import pandas as pd
 from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
 from datasets import Dataset
 
-# --- STEP 1: Load or create dataset ---
-from training_data import data
-df = pd.DataFrame(data)
+# --- STEP 1: Load cleaned dataset ---
+df = pd.read_csv("training_data_cleaned.csv")
 
 # --- STEP 2: Preprocessing ---
+label_map = {0: "pessimist", 1: "neutral", 2: "optimist"}
 checkpoint = "bert-base-uncased"
 tokenizer = BertTokenizer.from_pretrained(checkpoint)
-
-label_map = {0: "pessimist", 1: "optimist", 2: "neutral"}
 
 
 # Tokenization function
 def tokenize(batch):
     return tokenizer(batch["text"], padding=True, truncation=True)
 
-
 # Convert to HuggingFace Dataset
-dataset = Dataset.from_pandas(df)
-dataset = dataset.map(tokenize, batched=True)
-
-dataset = dataset.rename_column("label", "labels")
-dataset.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
+hf_dataset = Dataset.from_pandas(df[["text", "label"]])
+hf_dataset = hf_dataset.map(tokenize, batched=True)
+hf_dataset = hf_dataset.rename_column("label", "labels")
+hf_dataset.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
 
 # Split dataset
-train_test = dataset.train_test_split(test_size=0.3, seed=42)
+train_test = hf_dataset.train_test_split(test_size=0.3, seed=42)
 
 # --- STEP 3: Define Model ---
 model = BertForSequenceClassification.from_pretrained(checkpoint, num_labels=3)
@@ -47,8 +34,8 @@ model = BertForSequenceClassification.from_pretrained(checkpoint, num_labels=3)
 training_args = TrainingArguments(
     output_dir="./results",
     num_train_epochs=5,
-    per_device_train_batch_size=4,
-    per_device_eval_batch_size=4,
+    per_device_train_batch_size=8,
+    per_device_eval_batch_size=8,
     evaluation_strategy="epoch",
     save_strategy="epoch",
     logging_dir="./logs",
@@ -91,11 +78,10 @@ def predict_sentence(text: str):
     label = label_map[prediction]
     return label, probs
 
-
-# -- EXAMPLE USAGE --
-example_text = "I think tomorrow will be a great day!"
+# Example usage
+example_text = "This is amazingly stupid from your side. i am really happy you will lose and die most probably because you are so stupid. god, i wish you were not my brother"
 label, scores = predict_sentence(example_text)
 print("--- Example Prediction ---")
 print(f"Text: '{example_text}'")
 print(f"Predicted label: {label}")
-print(f"Probabilities: pessimist={scores[0]:.2f}, optimist={scores[1]:.2f}, neutral={scores[2]:.2f}")
+print(f"Probabilities: pessimist={scores[0]:.2f}, optimist={scores[2]:.2f}, neutral={scores[1]:.2f}")
