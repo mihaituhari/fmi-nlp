@@ -78,10 +78,24 @@ def predict_sentence(text: str):
     label = label_map[prediction]
     return label, probs
 
-# Example usage
-example_text = "This is amazingly stupid from your side. i am really happy you will lose and die most probably because you are so stupid. god, i wish you were not my brother"
-label, scores = predict_sentence(example_text)
-print("--- Example Prediction ---")
-print(f"Text: '{example_text}'")
-print(f"Predicted label: {label}")
-print(f"Probabilities: pessimist={scores[0]:.2f}, optimist={scores[2]:.2f}, neutral={scores[1]:.2f}")
+# Example usage for multiple sentences
+example_texts = [
+    "Everything is just the way it’s supposed to be.",
+    "At least it's raining, so no one can see me cry.",
+    "I'm so happy I get to redo everything because of someone else's mistake. Yay.",
+    "I lost the job I hated. Finally, I’m free to do something I actually care about."
+]
+print("\n--- Example Predictions ---")
+for text in example_texts:
+    label, scores = predict_sentence(text)
+    print(f"\nText: '{text}'")
+    print(f"Predicted label: {label}")
+    print(f"Probabilities: pessimist={scores[0]:.2f}, optimist={scores[2]:.2f}, neutral={scores[1]:.2f}")
+
+# Example usage for single sentence
+# example_text = "This is amazingly stupid from your side. i am really happy you will lose and die most probably because you are so stupid. god, i wish you were not my brother"
+# label, scores = predict_sentence(example_text)
+# print("--- Example Prediction ---")
+# print(f"Text: '{example_text}'")
+# print(f"Predicted label: {label}")
+# print(f"Probabilities: pessimist={scores[0]:.2f}, optimist={scores[2]:.2f}, neutral={scores[1]:.2f}")
