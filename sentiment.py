@@ -18,6 +18,7 @@ tokenizer = BertTokenizer.from_pretrained(checkpoint)
 def tokenize(batch):
     return tokenizer(batch["text"], padding=True, truncation=True)
 
+
 # Convert to HuggingFace Dataset
 hf_dataset = Dataset.from_pandas(df[["text", "label"]])
 hf_dataset = hf_dataset.map(tokenize, batched=True)
@@ -64,6 +65,7 @@ true_labels = predictions.label_ids
 unique_labels = sorted(list(set(true_labels) | set(preds)))
 target_names = [label_map[label] for label in unique_labels]
 
+
 # --- STEP 8: Predict single sentence ---
 def predict_sentence(text: str):
     model.eval()
@@ -78,6 +80,7 @@ def predict_sentence(text: str):
     label = label_map[prediction]
     return label, probs
 
+
 # Example usage for multiple sentences
 example_texts = [
     "Everything is just the way it’s supposed to be.",
@@ -85,6 +88,7 @@ example_texts = [
     "I'm so happy I get to redo everything because of someone else's mistake. Yay.",
     "I lost the job I hated. Finally, I’m free to do something I actually care about."
 ]
+
 print("\n--- Example Predictions ---")
 for text in example_texts:
     label, scores = predict_sentence(text)
