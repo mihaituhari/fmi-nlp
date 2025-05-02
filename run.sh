@@ -6,14 +6,13 @@ source .venv/bin/activate
 echo "📦 Installing dependencies..."
 pip install -r requirements.txt
 
-echo "🚀 Running clean_data.py..."
-python clean_data.py
+echo "🚂 Training data"
+python train_data.py
 
-echo "🚀 Running sentiment.py..."
+echo "🚀 Running sentiment analysis"
 python sentiment.py
 
-echo "📊 Generating sentiment report..."
+echo "📊 Generating sentiment report"
 python sentiment_report.py
 
 echo "✅ All done!"
-

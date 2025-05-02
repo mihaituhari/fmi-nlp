@@ -6,7 +6,7 @@ from transformers import BertTokenizer, BertForSequenceClassification, Trainer, 
 from datasets import Dataset
 
 # --- STEP 1: Load cleaned dataset ---
-df = pd.read_csv("training_data_cleaned.csv")
+df = pd.read_csv("data/training_cleaned.csv")
 
 # --- STEP 2: Preprocessing ---
 label_map = {0: "pessimist", 1: "neutral", 2: "optimist"}
@@ -41,7 +41,8 @@ training_args = TrainingArguments(
     save_strategy="epoch",
     logging_dir="./logs",
     load_best_model_at_end=True,
-    metric_for_best_model="eval_loss"
+    metric_for_best_model="eval_loss",
+    no_cuda=True # Fix for CPU training on Mac
 )
 
 # --- STEP 5: Define Trainer ---
