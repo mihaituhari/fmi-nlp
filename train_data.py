@@ -45,7 +45,10 @@ def clean_text(text):
 
     # Înlocuiește spațiile multiple cu un singur spațiu
     text = re.sub(r'\s+', ' ', text)
+
+    # Înlocuiește cuvintele abreviate
     text = text.replace('gr8', 'great').replace('b4', 'before').replace('luv', 'love')
+
     return text
 
 df["text"] = df["text"].apply(clean_text)
