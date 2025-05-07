@@ -34,12 +34,12 @@ def clean_text(text):
     text = re.sub(r'[^\w\s' + re.escape(string.punctuation) + ']', '', text)
 
     # Elimină caracterele non-ASCII
-    text = re.sub(r'[^\x00-\x7F]+', '', text)
+    text = re.sub(r'[^\x00-\x7eF]+', '', text)
 
     # Elimină semnele de punctuație repetitive excesive, înafara de ?!
     text = re.sub(r'[^\w\s!?]', '', text)
 
-    # Elimină semnele de punctuație repetitive"
+    # Elimină semnele de punctuație repetitive
     text = re.sub(r'([!?]){2,}', r'\1', text)
     text = text.lower()
 
